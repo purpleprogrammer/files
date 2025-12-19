@@ -1,0 +1,124 @@
+local SendAnnouncement = game:GetService("ReplicatedStorage"):WaitForChild("SendAnnouncement")
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+local Window = WindUI:CreateWindow({
+    Title = "Kyle Messager Script",
+    Icon = "eye", -- lucide icon
+    Author = "by purple.works on discord",
+    Folder = "kylemessager",
+    Theme = "Dark",
+    User = {
+        Enabled = true,
+        Anonymous = true,
+        Callback = function()
+            print("clicked")
+        end,
+    },
+})
+
+local Tab = Window:Tab({
+    Title = "yo main",
+    Locked = false,
+})
+
+local msg = ""
+
+local Input = Tab:Input({
+    Title = "text",
+    Desc = "setting",
+    Value = "",
+    Type = "Input", -- or "Textarea"
+    Placeholder = "enter text",
+    Callback = function(input) 
+        msg = input
+    end
+})
+
+local Button = Tab:Button({
+    Title = "send",
+    Desc = "sends the text bruh",
+    Locked = false,
+    Callback = function()
+        SendAnnouncement:FireServer(msg)
+    end
+})
+
+local spam = false
+local spamdelay = 0
+local randomspam = false
+
+local Input2 = Tab:Input({
+    Title = "delay",
+    Desc = "setting",
+    Value = "",
+    Type = "Input", -- or "Textarea"
+    Placeholder = "enter number",
+    Callback = function(input) 
+        spamdelay = input
+    end
+})
+
+local Toggle = Tab:Toggle({
+    Title = "auto spam",
+    Desc = "spam it",
+    Type = "Checkbox",
+    Value = false, -- default value
+    Callback = function(state) 
+        spam = state
+    end
+})
+
+local Toggle = Tab:Toggle({
+    Title = "auto random spam",
+    Desc = "spam it",
+    Type = "Checkbox",
+    Value = false, -- default value
+    Callback = function(state) 
+        randomspam = state
+    end
+})
+
+Tab:Select()
+
+while wait(0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001) do
+    if spam then
+        SendAnnouncement:FireServer(msg)
+        wait(spamdelay)
+    end
+    if randomspam then
+          local msgs = {
+          "cry about it",
+          "i wont stop",
+          "my discord: @purple.works",
+          "this game is fucked by @purple.works on discord",
+          "leave yall",
+          "yall are black niggas with small dick",
+          "get rekt",
+          "ez game ez life",
+          "lol you got destroyed",
+          "i am the king here",
+          "you can't touch me",
+          "i am invincible",
+          "your skills are trash",
+          "go touch some grass",
+          "i am the best player here",
+          "you are just mad",
+          "keep crying",
+          "i am unstoppable",
+          "you are all noobs",
+          "this game is too easy",
+          "i am the legend",
+          "you can't beat me",
+          "i am the god of this game",
+          "you are just jealous",
+          "i am always winning",
+          "you are all losers",
+          "i am the champion",
+          "you are just bad",
+          "i am the mastermind",
+          "you are all clueless"
+        }
+        SendAnnouncement:FireServer(msgs[math.random(1, #msgs)])
+        wait(spamdelay)
+    end
+end
